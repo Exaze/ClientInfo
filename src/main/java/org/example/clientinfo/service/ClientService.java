@@ -8,4 +8,6 @@ public interface ClientService {
     Client saveClient(Client client);
 
     List<Client> getAll();
+
+    List<Client> getClientByRequestParam(String requestParam);
 }
