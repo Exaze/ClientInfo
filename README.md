@@ -14,3 +14,6 @@ payload:-
 
 GET:-
 http://localhost:8080/api/client/getAll
+
+GET:-
+http://localhost:8080/api/client/getClient/{FirstName or ID Number or Phone Number}
