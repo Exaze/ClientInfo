@@ -52,7 +52,7 @@ public class ClientServiceImpl implements ClientService {
         }
 
         if (response.isEmpty()){
-            throw new ResourceNotFoundException("no data");
+            throw new ResourceNotFoundException("No Data For FirstName or ID Number or Phone Number");
         }
 
         return response.stream().toList();
