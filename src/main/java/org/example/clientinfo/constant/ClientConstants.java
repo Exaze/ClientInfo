@@ -2,15 +2,13 @@ package org.example.clientinfo.constant;
 
 public class ClientConstants {
 
-    private ClientConstants() {}
+    private ClientConstants() {
+    }
 
-    public static final String SUCCESS = "SUCCESS";
-    public static final String CLIENT_CREATION_FAILED ="Client creation failed";
-    public static final String CLIENT_CREATED = "Client created";
-    public static final String FAILURE = "FAILURE";
-    public static final String  OK = "Password updated successfully";
-    public static final String  INTERNAL_SERVER_ERROR ="Internal Server Error";
-    public static final String INVALID_CLIENT = "Client not found";
-    public static final String VALID_CLIENT = "Successfully deleted";
+    public static final String NO_DATA_FOUND = "No Data For FirstName or ID Number or Phone Number";
+    public static final String MOBILE_EXIST = "MobileNumber Already Exist";
+    public static final String INVALID_ID = "Not A Valid Id Number";
+    public static final String VALIDATION_ERROR = "Validation Error";
+    public static final String SEARCH_ERROR = "Search Error";
 
 }

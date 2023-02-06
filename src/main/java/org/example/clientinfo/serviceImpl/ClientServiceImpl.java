@@ -1,5 +1,6 @@
 package org.example.clientinfo.serviceImpl;
 
+import org.example.clientinfo.constant.ClientConstants;
 import org.example.clientinfo.entity.Client;
 import org.example.clientinfo.exception.ApiException;
 import org.example.clientinfo.exception.ResourceNotFoundException;
@@ -14,21 +15,17 @@ import java.util.Optional;
 
 @Service
 public class ClientServiceImpl implements ClientService {
-
     @Autowired
     private ClientRepository clientRepository;
-
     @Autowired
     private IDValidationService idValidationService;
 
     @Override
     public Client saveClient(Client client) {
-        if(clientRepository.existsByMobileNumber(client.getMobileNumber()))
-            throw new ApiException("MobileNumber Already Exist");
-
-        if(!idValidationService.isIDNumberValid(client.getIdNumber()))
-            throw new ApiException("Not A Valid Id Number");
-
+        if (clientRepository.existsByMobileNumber(client.getMobileNumber()))
+            throw new ApiException(ClientConstants.MOBILE_EXIST);
+        if (!idValidationService.validateClientIdNumber(client.getIdNumber()))
+            throw new ApiException(ClientConstants.INVALID_ID);
         return clientRepository.save(client);
 
     }
@@ -40,21 +37,16 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<Client> getClientByRequestParam(String requestParam) {
-
         Optional<Client> response = clientRepository.findById(requestParam);
-
-        if(response.isEmpty()){
+        if (response.isEmpty()) {
             response = clientRepository.findByFirstName(requestParam);
-
-            if(response.isEmpty()){
+            if (response.isEmpty()) {
                 response = clientRepository.findByMobileNumber(Long.parseLong(requestParam));
             }
         }
-
-        if (response.isEmpty()){
-            throw new ResourceNotFoundException("No Data For FirstName or ID Number or Phone Number");
+        if (response.isEmpty()) {
+            throw new ResourceNotFoundException(ClientConstants.NO_DATA_FOUND);
         }
-
         return response.stream().toList();
     }
 }

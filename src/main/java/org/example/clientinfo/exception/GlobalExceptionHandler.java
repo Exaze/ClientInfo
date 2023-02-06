@@ -1,5 +1,6 @@
 package org.example.clientinfo.exception;
 
+import org.example.clientinfo.constant.ClientConstants;
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> resourceNotFoundHandling(ResourceNotFoundException exception, WebRequest request){
         ErrorDetails errorDetails =
-                new ErrorDetails("Search Error", exception.getMessage());
+                new ErrorDetails(ClientConstants.SEARCH_ERROR, exception.getMessage());
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
@@ -31,7 +32,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> customValidationErrorHandling(MethodArgumentNotValidException exception){
-        ErrorDetails errorDetails =new ErrorDetails("Validation Error", exception.getBindingResult().getFieldError().getDefaultMessage());
+        ErrorDetails errorDetails =new ErrorDetails(ClientConstants.VALIDATION_ERROR, exception.getBindingResult().getFieldError().getDefaultMessage());
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
 

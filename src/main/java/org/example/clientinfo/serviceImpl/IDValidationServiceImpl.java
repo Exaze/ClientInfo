@@ -5,41 +5,35 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class IDValidationServiceImpl implements IDValidationService {
-    public boolean isIDNumberValid(String identities){
-        String identify = String.valueOf(identities);
-        int sumOdd = 0, sumEven = 0, _doubled;
+    public boolean validateClientIdNumber(String idNumber) {
+        int sumAtOddIndex = 0, sumAtIndexEven = 0, _doubled;
         int summation;
-        try {
-            String identity = String.valueOf(identify);
-            int length = identity.length() - 1;
-            char[] chars = identity.toCharArray();
-            String check = identity.substring(12);
-            for(int x  = 0; x < length; x++){
-                if(x % 2 == 0 ){
-                    String numString = String.valueOf(chars[x]);
-                    int numbers = Integer.valueOf(numString);
-                    sumOdd += numbers;
-                }else if(x % 2 != 0){
-                    String numString = String.valueOf(chars[x]);
-                    int numbers = Integer.valueOf(numString);
-                    int doubled = numbers * 2;
-                    if(doubled > 9){
-                        _doubled = doubled - 9;
-                    }else{
-                        _doubled = doubled;
-                    }
-                    sumEven += _doubled;
+        int length = idNumber.length() - 1;
+        char[] chars = idNumber.toCharArray();
+        String check = idNumber.substring(12);
+        for (int index = 0; index < length; index++) {
+            if (index % 2 == 0) {
+                String numString = String.valueOf(chars[index]);
+                int numbers = Integer.valueOf(numString);
+                sumAtOddIndex += numbers;
+            } else if (index % 2 != 0) {
+                String numString = String.valueOf(chars[index]);
+                int numbers = Integer.valueOf(numString);
+                int doubled = numbers * 2;
+                if (doubled > 9) {
+                    _doubled = doubled - 9;
+                } else {
+                    _doubled = doubled;
                 }
+                sumAtIndexEven += _doubled;
             }
-            summation = sumOdd + sumEven;
-            int checksum = Integer.valueOf(check);
-            if((summation * 9) % 10 == checksum)
-                return Boolean.TRUE;
-            else
-                return Boolean.FALSE;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Boolean.FALSE;
         }
+        summation = sumAtOddIndex + sumAtIndexEven;
+        int checksum = Integer.valueOf(check);
+        if ((summation * 9) % 10 == checksum)
+            return Boolean.TRUE;
+        else
+            return Boolean.FALSE;
+
     }
 }
