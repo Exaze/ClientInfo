@@ -49,4 +49,5 @@ public class ClientServiceImpl implements ClientService {
         }
         return response.stream().toList();
     }
+
 }

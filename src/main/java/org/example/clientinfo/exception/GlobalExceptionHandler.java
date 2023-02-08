@@ -15,7 +15,7 @@ public class GlobalExceptionHandler {
 
     // handling specific exception
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<?> resourceNotFoundHandling(ResourceNotFoundException exception, WebRequest request){
+    public ResponseEntity<?> resourceNotFoundHandling(ResourceNotFoundException exception){
         ErrorDetails errorDetails =
                 new ErrorDetails(ClientConstants.SEARCH_ERROR, exception.getMessage());
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
