@@ -20,6 +20,10 @@ public class ClientServiceImpl implements ClientService {
     @Autowired
     private IDValidationService idValidationService;
 
+    public ClientServiceImpl(ClientRepository clientRepository, IDValidationService idValidationService) {
+        this.clientRepository = clientRepository;
+        this.idValidationService = idValidationService;
+    }
     @Override
     public Client saveClient(Client client) {
         if (clientRepository.existsByMobileNumber(client.getMobileNumber()))
