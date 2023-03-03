@@ -1,19 +1,22 @@
-# ClientInfo
+ClientInfo
+============================================================================ Project :- REST API that allows for creating, updating and searching for a client.
 
-POST :- 
-http://localhost:8080/api/client/save
-payload:-
+A client should have the following fields, fields marked with * a mandatory Client First Name* Last Name* Mobile Number ID Number* Physical Address
 
-{
-    "idNumber": "031125100209",
-    "firstName": "Best",
-    "lastName": "Test",
-    "physicalAddress": "johannesburg",
-    "mobileNumber": 4233534537
-}
+When a client is created or updated the following fields should be validate ID Number
 
-GET:-
-http://localhost:8080/api/client/getAll
+Must be a valid south African ID number
+No Duplicates ID numbers Mobile Number
+No duplicate mobile numbers
+When validation fails an appropriate response should be provided.
 
-GET:-
-http://localhost:8080/api/client/getClient/{FirstName or ID Number or Phone Number}
+================================================================== A basic project on Java8, Hibernate, Springboot, Sprng Data JPA, Server as Tomcat, Use of Global Exception concept, Hibernate Validations
+
+Example:-
+POST :- http://localhost:8080/api/client/save payload:-
+
+{ "idNumber": "031125100209", "firstName": "Best", "lastName": "Test", "physicalAddress": "johannesburg", "mobileNumber": 4233534537 }
+
+GET:- http://localhost:8080/api/client/getAll
+
+GET:- http://localhost:8080/api/client/getClient/{FirstName or ID Number or Phone Number}
